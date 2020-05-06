@@ -1,0 +1,48 @@
+﻿@model IEnumerable<SpidySense.Data.Website>
+
+@{
+    ViewBag.Title = "Websites";
+}
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="text-right"><a href="~/websites/create" class="btn btn-md"><span class="glyphicon glyphicon-plus-sign"></span> Add Website</a></div>
+<table class="table table-striped tblCRUD">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            Main Url
+        </th>
+        <th>
+            Search Urls
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Url)
+            </td>
+            <td>
+                @Html.Raw(String.Join("<hr>", item.WebUrls.Select(wu => "<a target='_blank' href='" + wu.Url + "'>" + wu.Name + " ( " + wu.WebUrlFields.Count.ToString() + " fields )</a>").ToList()))
+            </td>
+            <td style="text-wrap:none;" nowrap class="text-right">
+                <a href="~/websites/edit/@item.Id" class="btn btn-md"><span class="glyphicon glyphicon-edit"></span></a> | <a href="~/websites/delete/@item.Id" class="btn btn-md"><span class="glyphicon glyphicon-trash"></span></a>
+            </td>
+        </tr>
+    }
+
+</table>

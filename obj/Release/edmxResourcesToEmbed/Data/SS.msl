@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SSModelStoreContainer" CdmEntityContainer="SSEntities">
+    <EntitySetMapping Name="Websites">
+      <EntityTypeMapping TypeName="SSModel.Website">
+        <MappingFragment StoreEntitySet="Website">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WebUrls">
+      <EntityTypeMapping TypeName="SSModel.WebUrl">
+        <MappingFragment StoreEntitySet="WebUrl">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="WebsiteId" ColumnName="WebsiteId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="RowSelector" ColumnName="RowSelector" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WebUrlFields">
+      <EntityTypeMapping TypeName="SSModel.WebUrlField">
+        <MappingFragment StoreEntitySet="WebUrlField">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="WebUrlId" ColumnName="WebUrlId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Selector" ColumnName="Selector" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,82 @@
+﻿@using SpidySense.Data
+@using System.Data
+@{
+    ViewBag.Title = "Web Crawler";
+}
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('#btnScrape').click(function () {
+                var webUrlId = $('#WebUrlId').val();
+                var searchUrl = $('#WebUrlId option:selected').attr('data-url');
+                $('#frmScrape').attr('src', '/crawl.aspx?WebUrlId=' + webUrlId);
+                $('#divSearchUrl').html("<a target='_blank' href='" + searchUrl + "'>" + searchUrl + "</a>");
+            });
+
+            $('#btnExport').click(function () {
+                $.ajax({
+                    method: "GET",
+                    url: '/export/getfiles'
+                })
+                    .done(function (response) {
+                        $('.modal-body').html(response);
+                    });
+            });
+        });
+    </script>
+
+}
+
+<p>&nbsp;</p>
+<form method="post" action="~/crawler/crawl">
+    <table class="tblFields">
+        <tr>
+            <th>Website / Search Url</th>
+        </tr>
+        <tr>
+            <td>
+                <select id="WebUrlId" class="form-control">
+                    @foreach (WebUrl webUrl in ViewBag.WebUrls)
+                    {
+                        <option value="@webUrl.Id" data-url="@webUrl.Url">@webUrl.Website.Name / @webUrl.Name</option>
+                    }
+                </select>
+            </td>
+            <td><span id="btnScrape" class="btn btn-md btn-primary">Scrape It!</span></td>
+        </tr>
+    </table>
+</form>
+
+<p>&nbsp;</p>
+<b>Search Url:</b><div id="divSearchUrl" class="divSearchUrl"></div>
+
+<table style="width:100%;">
+    <tr>
+        <th>Results</th>
+        <th class="text-right"><span id="btnExport" data-toggle="modal" data-target="#modExport" class="btn btn-sm btn-primary">Export to CSV/Excel</span></th>
+    </tr>
+</table>
+<iframe id="frmScrape" src="~/crawl.aspx" style="width:100%;height:500px;border:solid 1px navy;"></iframe>
+
+<!-- Modal -->
+<div id="modExport" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Export File List</h4>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>

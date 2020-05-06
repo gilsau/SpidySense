@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Website">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Url" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="WebUrl">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WebsiteId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Url" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="RowSelector" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WebUrlField">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WebUrlId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Selector" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__WebUrl__WebsiteI__76619304">
+    <End Role="Website" Type="Self.Website" Multiplicity="1" />
+    <End Role="WebUrl" Type="Self.WebUrl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Website">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WebUrl">
+        <PropertyRef Name="WebsiteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WebUrlFie__WebUr__793DFFAF">
+    <End Role="WebUrl" Type="Self.WebUrl" Multiplicity="1" />
+    <End Role="WebUrlField" Type="Self.WebUrlField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WebUrl">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WebUrlField">
+        <PropertyRef Name="WebUrlId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SSModelStoreContainer">
+    <EntitySet Name="Website" EntityType="Self.Website" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WebUrl" EntityType="Self.WebUrl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WebUrlField" EntityType="Self.WebUrlField" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__WebUrl__WebsiteI__76619304" Association="Self.FK__WebUrl__WebsiteI__76619304">
+      <End Role="Website" EntitySet="Website" />
+      <End Role="WebUrl" EntitySet="WebUrl" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WebUrlFie__WebUr__793DFFAF" Association="Self.FK__WebUrlFie__WebUr__793DFFAF">
+      <End Role="WebUrl" EntitySet="WebUrl" />
+      <End Role="WebUrlField" EntitySet="WebUrlField" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

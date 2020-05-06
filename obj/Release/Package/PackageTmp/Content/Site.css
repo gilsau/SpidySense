@@ -1,0 +1,55 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+hr {
+    padding: 1px;
+    margin: 2px;
+}
+
+h3.title {
+    font-size: 22px;
+    font-weight: 300;
+    padding: 10px;
+    margin: 5px 0px 0px 0px;
+    background-color: #0f256d;
+    color: #eee;
+}
+
+.tblCRUD td, .tblCRUD th {
+    font-size: 14px;
+    word-wrap: break-word;
+}
+
+.tblFields td, .tblFields th {
+    padding: 5px;
+}
+
+.divWebUrl {
+    background-color: #eee;
+    border: solid 1px #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.divSearchUrl {
+    border: solid 1px navy;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 2px 0px 20px 0px;
+}

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Website">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Url" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="WebUrls" Relationship="Self.FK__WebUrl__WebsiteI__76619304" FromRole="Website" ToRole="WebUrl" />
+  </EntityType>
+  <EntityType Name="WebUrl">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WebsiteId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Url" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RowSelector" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Website" Relationship="Self.FK__WebUrl__WebsiteI__76619304" FromRole="WebUrl" ToRole="Website" />
+    <NavigationProperty Name="WebUrlFields" Relationship="Self.FK__WebUrlFie__WebUr__793DFFAF" FromRole="WebUrl" ToRole="WebUrlField" />
+  </EntityType>
+  <EntityType Name="WebUrlField">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WebUrlId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Selector" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="WebUrl" Relationship="Self.FK__WebUrlFie__WebUr__793DFFAF" FromRole="WebUrlField" ToRole="WebUrl" />
+  </EntityType>
+  <Association Name="FK__WebUrl__WebsiteI__76619304">
+    <End Role="Website" Type="Self.Website" Multiplicity="1" />
+    <End Role="WebUrl" Type="Self.WebUrl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Website">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WebUrl">
+        <PropertyRef Name="WebsiteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WebUrlFie__WebUr__793DFFAF">
+    <End Role="WebUrl" Type="Self.WebUrl" Multiplicity="1" />
+    <End Role="WebUrlField" Type="Self.WebUrlField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WebUrl">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WebUrlField">
+        <PropertyRef Name="WebUrlId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Websites" EntityType="Self.Website" />
+    <EntitySet Name="WebUrls" EntityType="Self.WebUrl" />
+    <EntitySet Name="WebUrlFields" EntityType="Self.WebUrlField" />
+    <AssociationSet Name="FK__WebUrl__WebsiteI__76619304" Association="Self.FK__WebUrl__WebsiteI__76619304">
+      <End Role="Website" EntitySet="Websites" />
+      <End Role="WebUrl" EntitySet="WebUrls" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WebUrlFie__WebUr__793DFFAF" Association="Self.FK__WebUrlFie__WebUr__793DFFAF">
+      <End Role="WebUrl" EntitySet="WebUrls" />
+      <End Role="WebUrlField" EntitySet="WebUrlFields" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
